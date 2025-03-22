@@ -11,7 +11,7 @@
 #
 # To summarize:
 #
-# - `prev` should only be used to access attributes which are going to be overriden.
+# - `prev` should only be used to access attributes which are going to be overridden.
 # - `final` should only be used to access `callPackage` to build new packages.
 # - Attribute names should be computable without relying on `final`.
 #   - Extensions should take arguments to build attribute names before relying on `final`.
@@ -146,6 +146,9 @@ let
         fixupFn = ../development/cuda-modules/cudnn/fixup.nix;
       })
       (callPackage ../development/cuda-modules/cutensor/extension.nix {
+        inherit cudaVersion flags mkVersionedPackageName;
+      })
+      (callPackage ../development/cuda-modules/cusparselt/extension.nix {
         inherit cudaVersion flags mkVersionedPackageName;
       })
       (callPackage ../development/cuda-modules/generic-builders/multiplex.nix {
